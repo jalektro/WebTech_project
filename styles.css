@@ -1,0 +1,163 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 1em;
+    width: 100%;
+    text-align: center;
+}
+
+main {
+    padding: 2em;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.sales-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+.sale-item {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25em;
+    padding: 1em;
+    width: calc(33.333% - 2em);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.sale-item h2 {
+    font-size: 1.25em;
+    margin-top: 0;
+}
+
+.sale-item p {
+    margin: 0.5em 0;
+}
+
+.sale-item a {
+    display: inline-block;
+    margin-top: 0.5em;
+    padding: 0.5em 1em;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.25em;
+}
+
+.sale-item a:hover {
+    background-color: #0056b3;
+}
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 1rem;
+}
+
+section {
+    margin: 1rem 0;
+}
+
+section#data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 5px 0;
+}
+
+form input[type="text"],
+form input[type="email"] {
+    padding: 0.5rem;
+    margin-bottom: 10px;
+}
+
+form input[type="submit"] {
+    background: #333;
+    color: #fff;
+    padding: 0.7rem;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background: #555;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+@media (min-width: 768px) {
+    main {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    section {
+        flex: 1;
+        margin: 0 1rem;
+    }
+}
