@@ -14,7 +14,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">What will be on the site</a></li>
                 <li><a href="#data">Data</a></li> <!-- Link to the Data section -->
-                <li><a href="#contact">Contact</a></li>
+
             </ul>
         </nav>
     </header>
@@ -25,7 +25,7 @@
         </section>
         <section id="about">
             <h2>temperature measerment</h2>
-            <p>I will measure the temp with a rasp Pico and show this here in a table r graph.</p>
+            <p>I will measure the temp with a rasp Pico and show this here in a table and a graph.</p>
         </section>
         <section id="data">
             <h2>Data</h2>
@@ -34,21 +34,31 @@
             </div>
                         <!-- Add a button to open a new tab -->
                         <button id="viewGraphBtn">View Graph</button>
+                        <button id="exportCsvBtn">Export CSV</button>
         </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <form id="contact-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-                <input type="submit" value="Submit">
-            </form>
-        </section>
+
     </main>
-    <footer>
-        <p>&copy; 2024 Robert's Website/Server</p>
-    </footer>
+
+    <script>
+    // Add event listener to the CSV export button
+    document.getElementById("exportCsvBtn").addEventListener("click", function() {
+        // Construct the URL for the CSV export endpoint
+        var csvExportUrl = "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php?export=csv";
+
+        // Create a hidden anchor element to trigger the download
+        var anchor = document.createElement("a");
+        anchor.href = csvExportUrl;
+        anchor.download = "temperature_data.csv";
+        anchor.style.display = "none";
+        document.body.appendChild(anchor);
+
+        // Trigger the click event to initiate the download
+        anchor.click();
+
+        // Cleanup: Remove the anchor element from the DOM
+        document.body.removeChild(anchor);
+    });
+</script>
     <script>
         // Add event listener to the button
         document.getElementById("viewGraphBtn").addEventListener("click", function() {

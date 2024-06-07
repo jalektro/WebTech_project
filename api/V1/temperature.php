@@ -41,6 +41,31 @@ try {
             echo "Invalid data received.";
         }
     }
+    
+// Handle GET request to export temperature data as CSV
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['export']) && $_GET['export'] === 'csv') {
+    // Set the HTTP header to indicate a CSV file download
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="temperature_data.csv"');
+
+    // Query the database for temperature data
+    $stmt = $pdo->query('SELECT id, temperature, to_char(timestamp, \'YYYY-MM-DD HH24:MI:SS\') AS timestamp FROM temperature_data ORDER BY id');
+    $data = $stmt->fetchAll();
+
+    // Output CSV header
+    $output = fopen('php://output', 'w');
+    fputcsv($output, array('ID', 'Temperature', 'Timestamp'));
+
+    // Output each row of temperature data as CSV
+    foreach ($data as $row) {
+        fputcsv($output, $row);
+    }
+
+    // Close the output stream
+    fclose($output);
+    exit(); // Stop further execution
+}
+
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
