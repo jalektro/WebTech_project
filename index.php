@@ -21,10 +21,11 @@
     <main>
         <section id="home">
             <h2>Welcome</h2>
-            <p>This is just a try out to get PHP nicely working on the site.</p>
+            <p>Hello, I'm Robert a student at PXL. You can find my github repo here: </p>
+            <button id="githubpage">Github Repo</button>
         </section>
         <section id="about">
-            <h2>temperature measerment</h2>
+            <h2>Temperature measurement</h2>
             <p>I will measure the temp with a rasp Pico and show this here in a table and a graph.</p>
         </section>
         <section id="data">
@@ -38,7 +39,11 @@
         </section>
 
     </main>
-
+<script>
+    document.getElementById("githubpage").addEventListener("click", function() {
+            window.open("https://github.com/jalektro/WebTech_project", "_blank");
+        });
+</script>
     <script>
     // Add event listener to the CSV export button
     document.getElementById("exportCsvBtn").addEventListener("click", function() {
