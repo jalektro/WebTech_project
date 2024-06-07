@@ -1,8 +1,3 @@
-<?php
-// Include temperature.php
-require_once('api/v1/temperature.php');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +12,8 @@ require_once('api/v1/temperature.php');
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">what will be on the site</a></li>
-                <li><a href="#data">Data</a></li>
+                <li><a href="#about">What will be on the site</a></li>
+                <li><a href="#data">Data</a></li> <!-- Link to the Data section -->
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -26,7 +21,7 @@ require_once('api/v1/temperature.php');
     <main>
         <section id="home">
             <h2>Welcome</h2>
-            <p>This is just a try out to get PHP nice working on the site.</p>
+            <p>This is just a try out to get PHP nicely working on the site.</p>
         </section>
         <section id="about">
             <h2>What will be on this site</h2>
@@ -34,9 +29,8 @@ require_once('api/v1/temperature.php');
         </section>
         <section id="data">
             <h2>Data</h2>
-            <p>Dynamic data visualization will be here.</p>
             <div id="data-container">
-                <!-- Data will be populated here by JavaScript -->
+                <!-- Temperature data table will be populated here by JavaScript -->
             </div>
         </section>
         <section id="contact">
@@ -79,8 +73,8 @@ require_once('api/v1/temperature.php');
                 // Loop through each data object and format it
                 for (var i = 0; i < data.length; i++) {
                     var id = data[i].id;
-                    var temperature = data[i].value;
-                    var timestamp = data[i].created_at;
+                    var temperature = data[i].temperature;
+                    var timestamp = data[i].timestamp;
                     html += "<tr><td>" + id + "</td><td>" + temperature + "</td><td>" + timestamp + "</td></tr>";
                 }
 
@@ -88,7 +82,8 @@ require_once('api/v1/temperature.php');
                 container.innerHTML = html;
             }
 
-            // Fetch and display data every 5 seconds
+            // Fetch and display data initially and then every 5 seconds
+            fetchData(displayData);
             setInterval(function () {
                 fetchData(displayData);
             }, 5000);

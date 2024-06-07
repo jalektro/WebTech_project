@@ -15,6 +15,13 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
 
+    // Handle GET request to fetch temperature data
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $stmt = $pdo->query('SELECT * FROM temperature_data ORDER BY id DESC LIMIT 20');
+        $data = $stmt->fetchAll();
+        echo json_encode($data);
+    }
+
     // Check if the request is a POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the raw POST data
@@ -33,17 +40,7 @@ try {
         } else {
             echo "Invalid data received.";
         }
-    } else {
-        echo "Invalid request method.";
     }
-
-      // Handle GET request to fetch temperature data
-      if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $stmt = $pdo->query('SELECT * FROM temperature_data ORDER BY id DESC LIMIT 20');
-        $data = $stmt->fetchAll();
-        echo json_encode($data);
-    }
-    
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
