@@ -24,14 +24,16 @@
             <p>This is just a try out to get PHP nicely working on the site.</p>
         </section>
         <section id="about">
-            <h2>What will be on this site</h2>
-            <p>I will try to build you a database, don't know with what yet having no inspiration at this point.</p>
+            <h2>temperature measerment</h2>
+            <p>I will measure the temp with a rasp Pico and show this here in a table r graph.</p>
         </section>
         <section id="data">
             <h2>Data</h2>
             <div id="data-container">
                 <!-- Temperature data table will be populated here by JavaScript -->
             </div>
+                        <!-- Add a button to open a new tab -->
+                        <button id="viewGraphBtn">View Graph</button>
         </section>
         <section id="contact">
             <h2>Contact</h2>
@@ -47,6 +49,19 @@
     <footer>
         <p>&copy; 2024 Robert's Website/Server</p>
     </footer>
+    <script>
+        // Add event listener to the button
+        document.getElementById("viewGraphBtn").addEventListener("click", function() {
+            // Open a new tab
+            var newWindow = window.open();
+
+            // Construct the URL for the graph page
+            var graphPageUrl = "graph.php";
+
+            // Redirect the new tab to the graph page
+            newWindow.location.href = graphPageUrl;
+        });
+    </script>
     <script>
         function fetchData(callback) {
             var xhr = new XMLHttpRequest();
