@@ -39,85 +39,88 @@
         </section>
 
     </main>
-<script>
-    document.getElementById("githubpage").addEventListener("click", function() {
+
+    <script>
+        // Add event listener to the GitHub button
+        document.getElementById("githubpage").addEventListener("click", function() {
             window.open("https://github.com/jalektro/WebTech_project", "_blank");
         });
-</script>
-    <script>
-    // Add event listener to the CSV export button
-    document.getElementById("exportCsvBtn").addEventListener("click", function() {
-        // Construct the URL for the CSV export endpoint
-        var csvExportUrl = "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php?export=csv";
 
-        // Create a hidden anchor element to trigger the download
-        var anchor = document.createElement("a");
-        anchor.href = csvExportUrl;
-        anchor.download = "temperature_data.csv";
-        anchor.style.display = "none";
-        document.body.appendChild(anchor);
+        // Add event listener to the CSV export button
+        document.getElementById("exportCsvBtn").addEventListener("click", function() {
+            var csvExportUrl = "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php?export=csv";
+            var anchor = document.createElement("a");
+            anchor.href = csvExportUrl;
+            anchor.download = "temperature_data.csv";
+            anchor.style.display = "none";
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        });
 
-        // Trigger the click event to initiate the download
-        anchor.click();
-
-        // Cleanup: Remove the anchor element from the DOM
-        document.body.removeChild(anchor);
-    });
-</script>
-    <script>
-        // Add event listener to the button
+        // Add event listener to the View Graph button
         document.getElementById("viewGraphBtn").addEventListener("click", function() {
-            // Open a new tab
             var newWindow = window.open();
-
-            // Construct the URL for the graph page
             var graphPageUrl = "graph.php";
-
-            // Redirect the new tab to the graph page
             newWindow.location.href = graphPageUrl;
         });
-    </script>
-    <script>
-        function fetchData(callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText); // Parse the JSON response
-                        callback(data);
-                    } else {
-                        console.error("Error fetching data");
-                    }
-                }
-            };
-            xhr.send();
-        }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            function displayData(data) {
-                var container = document.getElementById("data-container");
-                var html = "<h2>Last 20 Temperature Readings</h2>";
-                html += "<table><tr><th>ID</th><th>Temperature</th><th>Timestamp</th></tr>";
-
-                // Loop through each data object and format it
-                for (var i = 0; i < data.length; i++) {
-                    var id = data[i].id;
-                    var temperature = data[i].temperature;
-                    var timestamp = data[i].timestamp;
-                    html += "<tr><td>" + id + "</td><td>" + temperature + "</td><td>" + timestamp + "</td></tr>";
-                }
-
-                html += "</table>";
-                container.innerHTML = html;
+function deleteData(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("DELETE", "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log("Record deleted successfully");
+                fetchData(displayData); // Refresh data after deletion
+            } else {
+                console.error("Error deleting record: " + xhr.statusText);
             }
+        }
+    };
+    xhr.send("id=" + id);
+}
 
-            // Fetch and display data initially and then every 5 seconds
-            fetchData(displayData);
-            setInterval(function () {
-                fetchData(displayData);
-            }, 5000);
-        });
+function fetchData(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://server-of-robert.pxl.bjth.xyz/api/v1/temperature.php", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                callback(data);
+            } else {
+                console.error("Error fetching data: " + xhr.statusText);
+            }
+        }
+    };
+    xhr.send();
+}
+
+function displayData(data) {
+    var container = document.getElementById("data-container");
+    var html = "<h2>Last 20 Temperature Readings</h2>";
+    html += "<table><tr><th>ID</th><th>Temperature</th><th>Timestamp</th><th>Actions</th></tr>";
+    data.forEach(function(item) {
+        html += "<tr>";
+        html += "<td>" + item.id + "</td>";
+        html += "<td>" + item.temperature + "</td>";
+        html += "<td>" + item.timestamp + "</td>";
+        html += "<td><button onclick='deleteData(" + item.id + ")'>Delete</button></td>";
+        html += "</tr>";
+    });
+    html += "</table>";
+    container.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetchData(displayData);
+    setInterval(function() {
+        fetchData(displayData);
+    }, 5000);
+});
     </script>
+
 </body>
 </html>
