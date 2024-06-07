@@ -1,76 +1,13 @@
 /* styles.css */
+
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-header {
-    background-color: #343a40;
-    color: white;
-    padding: 1em;
-    width: 100%;
-    text-align: center;
-}
-
-main {
-    padding: 2em;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.sales-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    justify-content: center;
-}
-
-.sale-item {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25em;
-    padding: 1em;
-    width: calc(33.333% - 2em);
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-.sale-item h2 {
-    font-size: 1.25em;
-    margin-top: 0;
-}
-
-.sale-item p {
-    margin: 0.5em 0;
-}
-
-.sale-item a {
-    display: inline-block;
-    margin-top: 0.5em;
-    padding: 0.5em 1em;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 0.25em;
-}
-
-.sale-item a:hover {
-    background-color: #0056b3;
-}
-/* Basic reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
     line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 header {
@@ -81,7 +18,7 @@ header {
 }
 
 header h1 {
-    margin-bottom: 0.5rem;
+    margin: 0;
 }
 
 nav ul {
@@ -97,6 +34,11 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
 }
 
 main {
@@ -104,13 +46,21 @@ main {
 }
 
 section {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-section#data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 
 form {
@@ -119,45 +69,28 @@ form {
 }
 
 form label {
-    margin: 5px 0;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 form input[type="text"],
 form input[type="email"] {
+    margin-bottom: 1rem;
     padding: 0.5rem;
-    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 form input[type="submit"] {
-    background: #333;
-    color: #fff;
     padding: 0.7rem;
     border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
     cursor: pointer;
+    font-weight: bold;
 }
 
 form input[type="submit"]:hover {
     background: #555;
-}
-
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
-
-@media (min-width: 768px) {
-    main {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    section {
-        flex: 1;
-        margin: 0 1rem;
-    }
 }

@@ -1,6 +1,9 @@
 
 server-of-robert.pxl.bjth.xyz
-root * /var/www/html
-php_fastcgi unix//run/php/php8.3-fpm.sock
+root * /var/www/html/
+php_fastcgi unix//run/php/php-fpm.sock
 
 file_server
+
+
+
