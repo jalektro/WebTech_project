@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">What will be on the site</a></li>
+                <li><a href="#about">Temperature measurement</a></li>
                 <li><a href="#data">Data</a></li> <!-- Link to the Data section -->
 
             </ul>
@@ -23,6 +23,9 @@
             <h2>Welcome</h2>
             <p>Hello, I'm Robert a student at PXL. You can find my github repo here: </p>
             <button id="githubpage">Github Repo</button>
+            <video width= "600" controls>
+                <source src="filmpje.mp4" type = "video/mp4">
+            </video>
         </section>
         <section id="about">
             <h2>Temperature measurement</h2>
